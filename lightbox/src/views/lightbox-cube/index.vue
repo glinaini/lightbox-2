@@ -8,14 +8,16 @@
     
       <div>- - | - - | - - | - - | - - | - - </div>
       <title>第二种--点击图片显示图片 ，展示的图片是每次被点击的图片</title>
-      <ul>
+      <ul class="img-wrap">
         <li
           :key="index"
           @click="preview(index)"
-          v-for="(l, index) in images">
+          v-for="(l, index) in images"
+        >
           <img 
             :src="l" 
-            alt="">
+            alt=""
+          >
         </li>
       </ul>
     </div>
@@ -23,7 +25,7 @@
 </template>
 <script>
 export default {
-  name: 'App',
+  name: 'Index',
   data() {
     return {
       images: [
@@ -59,52 +61,39 @@ export default {
     },
     // 按钮点中显示图片预览图
     showImagePreview() {
+      console.info(this.$imagePreview)
       this.$imagePreview({
         images: this.btnImages,
         defaultOpt: {
           fullscreenEl: false,
+          arrowEl: true,
           bgOpacity: 0.85,
           errorMsg: '<div class="pswp__error-msg">图片加载失败</div>'
         }
-      }).show()
+      })
     }
   }
 }
 </script>
 
 <style>
+/* @import './vue-image-swipe/dist/vue-image-swipe.css'; */
 button {
   padding: 5px;
   margin-bottom: 20px;
 }
-ul,
+.img-wrap,
 li {
   list-style: none;
 }
-img {
+.img-wrap li img {
   width: 100%;
   height: auto;
 }
-.picture-item {
-  box-sizing: border-box;
-  padding: 0 5px 10px;
-}
-.picture-nothumb {
-  position: relative;
-  padding-bottom: 100%;
-  height: 0;
-  background-color: #f9f9f9;
-  overflow: hidden;
-}
-.picture-nothumb img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-@media screen and (min-width: 641px) {
-  .wrap {
-    width: 640px;
+@media screen and (min-width: 300px) {
+  img {
+    width: 100%;
+    height: auto;
   }
 }
 </style>
